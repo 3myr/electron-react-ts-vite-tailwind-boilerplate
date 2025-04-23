@@ -1,4 +1,3 @@
-
 import isDev from './isDev'
 
 export const domain = isDev

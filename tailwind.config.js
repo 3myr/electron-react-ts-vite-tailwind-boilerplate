@@ -6,7 +6,7 @@ export default {
     extend: {
       colors: {
         main: {
-          dark: '#222831',
+          dark: '#202020',
           light: '#31363F'
         }
       }

@@ -17,18 +17,27 @@ This project is a **boilerplate** for creating desktop applications using **Elec
 ## Requirements
 
 - **Node.js** (version 20 or higher)
-- **bun**
-
 ---
 
 ## Installation
 
-1. **Install dependencies:**
+**For Enterprise environment:**
 
-Using bun:
+If you have any issue with company certificate (ex: ZScaler), disable TLS before doing an npm install using :
+
+`$env:NODE_TLS_REJECT_UNAUTHORIZED="0"`
+
+After installation, reset the parameter using :
+
+`$env:NODE_TLS_REJECT_UNAUTHORIZED="1"`
+
+
+**Install dependencies:**
+
+Using npm:
 
 ```bash
-bun install
+npm install
 ```
 
 Or using yarn:
@@ -43,10 +52,16 @@ yarn install
 
 ### Development Mode
 
-Start the application in development mode (with hot reloading):
+Start the web application in development mode (with hot reloading):
 
 ```bash
-bun run dev
+npm run dev
+```
+
+Start the complete application in development mode (with hot reloading):
+
+```bash
+npm run electron:dev
 ```
 
 This command launches the **Vite** development server for the renderer process and opens the Electron window.
@@ -56,7 +71,7 @@ This command launches the **Vite** development server for the renderer process a
 Generate optimized files for production:
 
 ```bash
-bun run build
+npm run build
 ```
 
 ### Packaging
@@ -64,7 +79,7 @@ bun run build
 If you use a packaging tool (e.g., Electron Builder), run:
 
 ```bash
-bun run package
+npm run dist
 ```
 
 ### Linting
@@ -72,13 +87,13 @@ bun run package
 Check your code with ESLint:
 
 ```bash
-bun run lint
+npm run lint
 ```
 
 To automatically fix some of the detected issues (when possible):
 
 ```bash
-bun run lint -- --fix
+npm run lint -- --fix
 ```
 
 ---
@@ -99,15 +114,19 @@ Below is an overview of the folders and files in this boilerplate:
 ├── src/
 │   ├── assets/
 │   ├── components/
-│   │   ├── .gitkeep
-│   │   ├── CloseButtons.tsx
-│   │   ├── Header.tsx
-│   │   └── Main.tsx
+│   │   └── header/
+│   │       ├── Header.tsx
+│   │       └── Header.scss
+│   ├── containers/
+│   │   └── app/
+│   │       ├── App.tsx
+│   │       └── App.scss
 │   ├── hooks/
 │   ├── lib/
 │   ├── model/
-│   ├── App.tsx
-│   ├── electron.tsx
+│   ├── electron.d.ts
+│   ├── index.css
+│   ├── vite-env.d.ts
 │   └── main.tsx
 ├── .env.example
 ├── .gitignore
@@ -117,9 +136,14 @@ Below is an overview of the folders and files in this boilerplate:
 ├── eslint.config.js
 ├── package.json
 ├── postcss.config.cjs
+├── tailwind.config.js
+├── index.html
 ├── readme.md
-├── vite-env.d.ts
-└── vite.config.js
+├── package.json
+├── tsconfig.json
+├── tsconfig.renderer.json
+├── tsconfig.vite.json
+└── vite.config.ts
 ```
 
 - **main/**: Contains Electron’s main process code (`index.ts`, `preload.ts`, etc.).
@@ -127,7 +151,7 @@ Below is an overview of the folders and files in this boilerplate:
 - **public/**: Static files to be served directly.
 - **.env.example**: Example environment variables.
 - **electron-builder.config.js**: Configuration for packaging your app (if using Electron Builder).
-- **esbuild.config.mjs**, **eslint.config.js**, **postcss.config.cjs**, **vite.config.js**: Various configuration files.
+- **esbuild.config.mjs**, **eslint.config.js**, **postcss.config.cjs**, **vite.config.ts**, **tsconfig.json**, **tsconfig.renderer.json**, **tsconfig.vite.json**: Various configuration files.
 - **package.json**: Scripts and dependencies.
 - **readme.md**: This file.
 

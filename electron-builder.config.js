@@ -10,14 +10,6 @@ const config = {
   directories: {
     buildResources: "public",
     output: "dist",
-  },  
-  publish: {
-    provider: '{{github}}',
-    owner: '{{github.owner}}',
-    repo: '{{github.repo}}',
-    releaseType: process.env.CHANNEL === 'beta' ? 'prerelease' : 'release',
-    publishAutoUpdate: true,
-
   },
   artifactName: process.env.CHANNEL === 'beta' ? 'Setup-${productName}${version}.${ext}' : 'Setup-${productName}${version}.${ext}',
   win: {
